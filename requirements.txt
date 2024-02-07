@@ -1,0 +1,8 @@
+streamlit
+cassandra-driver
+cassio>=0.1.1
+gradientai
+nbconvert
+llama-index
+pypdf
+tiktoken==0.4.0 

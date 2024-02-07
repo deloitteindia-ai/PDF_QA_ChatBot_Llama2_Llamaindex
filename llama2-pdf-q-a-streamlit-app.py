@@ -52,7 +52,7 @@ def main():
     os.environ['GRADIENT_ACCESS_TOKEN'] = "49SxShZ6rRvQu8YVAeSjoj3a91rqBWZm"
     os.environ['GRADIENT_WORKSPACE_ID'] = "6114a445-d716-4ff4-ac7b-a7ab9ad42995_workspace"
 
-    llm = GradientBaseModelLLM(base_model_slug="llama2-7b-chat", max_tokens=400)
+    llm = GradientBaseModelLLM(base_model_slug="llama2-7b-chat", max_tokens=200, repetition_penalty=1.1, temperature = 0.8)
 
     embed_model = GradientEmbedding(
         gradient_access_token = os.environ["GRADIENT_ACCESS_TOKEN"],

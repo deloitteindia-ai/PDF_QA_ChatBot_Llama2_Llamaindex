@@ -63,7 +63,7 @@ def main():
     llm = llm,
     embed_model = embed_model,
     chunk_size=256,
-    temperature = 0.8)
+    pydantic_program_mode = "llm")
 
     set_global_service_context(service_context)
 

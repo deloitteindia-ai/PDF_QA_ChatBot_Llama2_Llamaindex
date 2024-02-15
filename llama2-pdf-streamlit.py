@@ -3,13 +3,11 @@ import os
 import streamlit as st
 from cassandra.auth import PlainTextAuthProvider
 from cassandra.cluster import Cluster
-from llama_index.core import ServiceContext
-from llama_index import VectorStoreIndex, SimpleDirectoryReader
-from llama_index import StorageContext
-from llama_index import set_global_service_context
-from llama_index.embeddings import GradientEmbedding
-from llama_index.llms import GradientBaseModelLLM
-from llama_index.vector_stores import CassandraVectorStore
+from llama_index.core import ServiceContext, VectorStoreIndex, SimpleDirectoryReader, StorageContext
+from llama_index.core import set_global_service_context
+from llama_index.embeddings.gradient import GradientEmbedding
+from llama_index.llms.gradient import GradientBaseModelLLM
+from llama_index.vector_stores.cassandra import CassandraVectorStore
 from copy import deepcopy
 from tempfile import NamedTemporaryFile
 

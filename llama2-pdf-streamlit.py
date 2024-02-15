@@ -3,7 +3,8 @@ import os
 import streamlit as st
 from cassandra.auth import PlainTextAuthProvider
 from cassandra.cluster import Cluster
-from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, ServiceContext
+from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
+from llama_index.core import ServiceContext
 from llama_index import StorageContext
 from llama_index import set_global_service_context
 from llama_index.embeddings import GradientEmbedding

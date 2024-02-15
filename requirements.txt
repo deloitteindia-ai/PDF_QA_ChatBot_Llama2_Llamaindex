@@ -3,7 +3,7 @@ cassandra-driver
 cassio>=0.1.1
 gradientai
 nbconvert
-llama-index==0.10.4
+llama-index==0.9.44
 llama-index-core
 llama-index-llms-gradient
 llama-index-embeddings-gradient

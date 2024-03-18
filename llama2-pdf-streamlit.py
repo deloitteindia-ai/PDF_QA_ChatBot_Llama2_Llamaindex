@@ -9,6 +9,7 @@ from cassandra.cluster import Cluster
 #from llama_index.embeddings.gradient import GradientEmbedding
 #from llama_index.llms.gradient import GradientBaseModelLLM
 #from llama_index.vector_stores.cassandra import CassandraVectorStore
+from gradientai import Gradient
 from llama_index import ServiceContext
 from llama_index import VectorStoreIndex, SimpleDirectoryReader, StorageContext
 from llama_index import set_global_service_context

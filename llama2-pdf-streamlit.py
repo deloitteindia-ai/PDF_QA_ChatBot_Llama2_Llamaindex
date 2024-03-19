@@ -4,7 +4,10 @@ import streamlit as st
 from cassandra.auth import PlainTextAuthProvider
 from cassandra.cluster import Cluster
 from llama_index import VectorStoreIndex, SimpleDirectoryReader, StorageContext
-
+from llama_index.embeddings import GradientEmbedding
+from llama_index.llms import GradientModelAdapterLLM
+from llama_index import ServiceContext
+from llama_index import set_global_service_context
 from llama_index.vector_stores import CassandraVectorStore
 from copy import deepcopy
 from tempfile import NamedTemporaryFile
@@ -62,11 +65,25 @@ def main():
             with NamedTemporaryFile(dir='.', suffix='.pdf') as f:
                 f.write(docs.getbuffer())
                 with st.spinner('Processing'):
-                    fine_tuner = FineTuner(model_name = "FineTunedLlama2", num_epochs = 5)
-                    service_context = fine_tuner.fine_tune()
+                    #fine_tuner = FineTuner(model_name = "FineTunedLlama2", num_epochs = 5)
+                    #service_context = fine_tuner.fine_tune()
+                    
+                    model_adapter_id = "348d6eb3-32e2-44cb-92a2-fde14bd42cee_model_adapter"
+                    llm = GradientModelAdapterLLM(model_adapter_id = model_adapter.id, max_tokens=200)
+                    # Initialize Gradient AI Cloud with credentials
+                    embed_model = GradientEmbedding(
+                                gradient_access_token = os.environ["GRADIENT_ACCESS_TOKEN"],
+                                gradient_workspace_id = os.environ["GRADIENT_WORKSPACE_ID"],
+                                gradient_model_slug="bge-large")
+                    service_context = ServiceContext.from_defaults(
+                        llm = llm,
+                        embed_model = embed_model,
+                        chunk_size=256)
+            
                     documents = SimpleDirectoryReader(".").load_data()
                     index = VectorStoreIndex.from_documents(documents,
                                                             service_context=service_context)
+                    set_global_service_context(service_context)
                     query_engine = index.as_query_engine()
                     if "query_engine" not in st.session_state:
                         st.session_state.query_engine = query_engine

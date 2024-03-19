@@ -59,43 +59,13 @@ def main():
     os.environ['GRADIENT_ACCESS_TOKEN'] = "49SxShZ6rRvQu8YVAeSjoj3a91rqBWZm"
     os.environ['GRADIENT_WORKSPACE_ID'] = "6114a445-d716-4ff4-ac7b-a7ab9ad42995_workspace"
 
-    #llm = GradientBaseModelLLM(base_model_slug="llama2-7b-chat", max_tokens=400, is_chat_model = True)
-
-    gradient = Gradient()
-    base_model = gradient.get_base_model(base_model_slug = "llama2-7b-chat")
-
-    new_model_adapter = base_model.create_model_adapter(name = 'FineTunedLlama2')
-
-    variations = [
-        {"inputs": "### Instruction: Define an RFP Document \n\n Response: An RFP Document, short for Request for Proposal document, is a formal solicitation that organizations use to invite bids from potential vendors or service providers for a specific project or service. The RFP outlines the project requirements, objectives, and scope, providing detailed information to guide potential respondents in preparing their proposals."},
-        {"inputs": "### Instruction: Explain the concept of an RFP Document \n\n Response: An RFP Document, also known as a Request for Proposal document, is a formal invitation from organizations to prospective vendors or service providers to submit proposals for a particular project or service. The RFP specifies the project's requirements, goals, and scope, enabling potential bidders to understand the project's needs and submit relevant proposals."},
-        {"inputs": "### Instruction: What exactly is meant by an RFP Document? \n\n Response: An RFP Document, which stands for Request for Proposal document, is a formal solicitation used by organizations to request proposals from potential vendors or service providers for a specific project or service. The RFP outlines the project's objectives, requirements, and scope, providing necessary details to facilitate the submission and evaluation of proposals."},
-        {"inputs": "### Instruction: Clarify the purpose of an RFP Document \n\n Response: An RFP Document, or Request for Proposal document, serves as a formal request from organizations to potential vendors or service providers for proposals related to a specific project or service. The RFP outlines the project's objectives, requirements, and scope, guiding vendors in preparing and submitting their proposals."},
-        {"inputs": "### Instruction: Please elaborate on the significance of an RFP Document \n\n Response: An RFP Document, commonly known as a Request for Proposal document, holds significant importance in procurement processes, as it serves as a formal invitation from organizations to potential vendors or service providers to submit proposals for a specific project or service. The RFP outlines the project's objectives, requirements, and scope, facilitating the selection of the most suitable vendor or service provider for the project."},
-        {"inputs": "### Instruction: Could you shed some light on the function of an RFP Document? \n\n Response: An RFP Document, which stands for Request for Proposal document, plays a crucial role in procurement processes by serving as a formal invitation from organizations to potential vendors or service providers to submit proposals for a specific project or service. The RFP outlines the project's objectives, requirements, and scope, guiding vendors in preparing and submitting their proposals for evaluation and selection."},
-        {"inputs": "### Instruction: Kindly provide an overview of an RFP Document \n\n Response: An RFP Document, also referred to as a Request for Proposal document, provides a comprehensive overview of a project or service for which organizations seek proposals from potential vendors or service providers. The RFP outlines the project's objectives, requirements, and scope, facilitating the submission and evaluation of proposals by interested parties."},
-        {"inputs": "### Instruction: Shed some light on the purpose of an RFP Document \n\n Response: An RFP Document, short for Request for Proposal document, serves as a formal request from organizations to potential vendors or service providers for proposals related to a specific project or service. The RFP outlines the project's objectives, requirements, and scope, providing necessary details to facilitate the submission and evaluation of proposals."},
-        {"inputs": "### Instruction: What role does an RFP Document play in procurement processes? \n\n Response: An RFP Document, commonly known as a Request for Proposal document, plays a pivotal role in procurement processes by serving as a formal invitation from organizations to potential vendors or service providers to submit proposals for a specific project or service. The RFP outlines the project's objectives, requirements, and scope, guiding vendors in preparing and submitting their proposals for evaluation and selection."},
-        {"inputs": "### Instruction: Can you provide a brief explanation of an RFP Document? \n\n Response: An RFP Document, which stands for Request for Proposal document, is a formal solicitation used by organizations to request proposals from potential vendors or service providers for a specific project or service. The RFP outlines the project's objectives, requirements, and scope, providing necessary details to facilitate the submission and evaluation of proposals."},
-    ]
-
-    num_epochs = 5
-    count = 0
-
-    while count < num_epochs:
-      print(f"Fine-tuning the model, Epoch iteration => {count + 1}")
-      new_model_adapter.fine_tune(samples = variations)
-      count += 1
+    llm = GradientBaseModelLLM(base_model_slug="llama2-7b-chat", max_tokens=400, is_chat_model = True)
     
     
     embed_model = GradientEmbedding(
         gradient_access_token = os.environ["GRADIENT_ACCESS_TOKEN"],
         gradient_workspace_id = os.environ["GRADIENT_WORKSPACE_ID"],
         gradient_model_slug="bge-large")
-
-    llm = GradientModelAdapterLLM(
-        model_adapter_id = new_model_adapter.id,
-        max_tokens = 300)
 
     service_context = ServiceContext.from_defaults(
     llm = llm,

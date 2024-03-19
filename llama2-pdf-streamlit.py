@@ -69,7 +69,7 @@ def main():
                     #service_context = fine_tuner.fine_tune()
                     
                     model_adapter_id = "348d6eb3-32e2-44cb-92a2-fde14bd42cee_model_adapter"
-                    llm = GradientModelAdapterLLM(model_adapter_id = model_adapter.id, max_tokens=200)
+                    llm = GradientModelAdapterLLM(model_adapter_id = model_adapter_id, max_tokens=200)
                     # Initialize Gradient AI Cloud with credentials
                     embed_model = GradientEmbedding(
                                 gradient_access_token = os.environ["GRADIENT_ACCESS_TOKEN"],

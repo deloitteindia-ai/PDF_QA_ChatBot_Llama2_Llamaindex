@@ -68,7 +68,8 @@ def main():
                     #fine_tuner = FineTuner(model_name = "FineTunedLlama2", num_epochs = 5)
                     #service_context = fine_tuner.fine_tune()
                     
-                    model_adapter_id = "348d6eb3-32e2-44cb-92a2-fde14bd42cee_model_adapter"
+                    #model_adapter_id = "348d6eb3-32e2-44cb-92a2-fde14bd42cee_model_adapter"
+                    model_adapter_id = "c6e2a7cb-5941-412d-96bf-b7e3c94c24c4_model_adapter"
                     llm = GradientModelAdapterLLM(model_adapter_id = model_adapter_id, max_tokens=200)
                     # Initialize Gradient AI Cloud with credentials
                     embed_model = GradientEmbedding(

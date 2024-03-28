@@ -111,14 +111,10 @@ def main():
 
     if st.session_state.activate_chat == True:
         selected_question = st.selectbox('Select a default question', [""] + default_questions)
-        
-        if selected_question:
-            prompt = st.chat_input(selected_question)
-            #st.session_state.selected_question = ""
-        else:
-            prompt = st.chat_input("Ask your question from the PDF?")
-            
-        if prompt:
+                   
+        if prompt := st.chat_input("Ask your question from the PDF!"):
+            if selected_question:
+                prompt = st.chat_input(selected_question)
             with st.chat_message("user", avatar = '👨🏻'):
                 st.markdown(prompt)
             st.session_state.messages.append({"role": "user", 

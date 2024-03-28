@@ -113,7 +113,7 @@ def main():
         selected_question = st.selectbox('Select a default question', [""] + default_questions)
         
         if selected_question:
-            prompt = st.markdown(selected_question)
+            prompt = st.chat_input(selected_question)
             #st.session_state.selected_question = ""
         else:
             prompt = st.chat_input("Ask your question from the PDF?")

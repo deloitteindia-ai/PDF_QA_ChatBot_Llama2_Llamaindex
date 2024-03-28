@@ -59,6 +59,9 @@ def main():
     if "activate_chat" not in st.session_state:
         st.session_state.activate_chat = False
 
+    if "prompt" not in st.session_state:
+        st.session_state.prompt = None
+
     if "messages" not in st.session_state:
         st.session_state.messages = []
 
@@ -112,11 +115,10 @@ def main():
     if st.session_state.activate_chat == True:
         selected_question = st.selectbox('Select a default question', [""] + default_questions)
         if selected_question:
-            prompt = selected_question
-            st.session_state.activate_chat = True
+            st.session_state.prompt = selected_question
         else:
-            prompt = st.chat_input("Ask your question from the PDF?")           
-        if prompt:
+            st.session_prompt = st.chat_input("Ask your question from the PDF?")           
+        if st.session_state.prompt:
             #if selected_question:
             #    prompt = st.chat_input(selected_question)
             with st.chat_message("user", avatar = '👨🏻'):

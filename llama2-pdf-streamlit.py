@@ -147,8 +147,10 @@ def main():
                 var chatInput = parent.document.querySelector('textarea[data-testid="stChatInput"]');
                 var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, "value").set;
                 nativeInputValueSetter.call(chatInput, "{selected_question}");
-                var event = new Event('input', {{ bubbles: true}});
-                chatInput.dispatchEvent(event);
+                #var event = new Event('input', {{ bubbles: true}});
+                #chatInput.dispatchEvent(event);
+                chatInput.innerHTML(selected_question);
+        
             }}
             insertText({len(st.session_state.messages)});
         </script>

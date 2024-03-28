@@ -122,10 +122,10 @@ def main():
             #if selected_question:
             #    prompt = st.chat_input(selected_question)
             with st.chat_message("user", avatar = '👨🏻'):
-                st.markdown(prompt)
+                st.markdown(st.session_state.prompt)
             st.session_state.messages.append({"role": "user", 
                                               "avatar" :'👨🏻',
-                                              "content": prompt})
+                                              "content": st.session_state.prompt})
 
             query_index_placeholder = st.session_state.query_engine
             pdf_response = query_index_placeholder.query(prompt)

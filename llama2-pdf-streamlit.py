@@ -136,10 +136,10 @@ def main():
             st.session_state.messages.append({"role": "assistant", 
                                               "avatar" :'🤖',
                                               "content": pdf_response})
-        else:
-            st.markdown(
-                'Upload your PDFs to chat'
-                )
+    else:
+        st.markdown(
+            'Upload your PDFs to chat'
+        )
         
         js = f"""
         <script>

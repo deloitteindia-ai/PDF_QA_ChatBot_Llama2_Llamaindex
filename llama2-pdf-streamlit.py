@@ -140,6 +140,20 @@ def main():
             st.markdown(
                 'Upload your PDFs to chat'
                 )
+        
+        js = f"""
+        <script>
+            function insertText(dummy_var_to_force_repeat_execution) {{
+                var chatInput = parent.document.querySelector('textarea[data-testid="stChatInput"]');
+                var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, "value").set;
+                nativeInputValueSetter.call(chatInput, "{selected_question}");
+                var event = new Event('input', {{ bubbles: true}});
+                chatInput.dispatchEvent(event);
+            }}
+            insertText({len(st.session_state.messages)});
+        </script>
+        """
+        st.components.v1.html(js)
 
 
 if __name__ == '__main__':

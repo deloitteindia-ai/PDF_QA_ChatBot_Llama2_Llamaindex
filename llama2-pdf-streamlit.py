@@ -30,10 +30,30 @@ def create_datastax_connection():
     return astra_session
 
 def main():
-
+    default_questions = [
+    "How would you describe the objectives and scope outlined in the RFP document?",
+    "Can you provide the pertinent dates specified in the RFP, such as submission deadlines, last date for queries, and any pre-bid query periods?",
+    "What are the criteria outlined in the RFP for pre-qualification, determining bid eligibility, or any other eligibility requirements?",
+    "Could you outline the technical qualification criteria specified in the RFP, including evaluation marks or qualification thresholds?",
+    "What constitutes the commercial qualification criteria as stated in the RFP?",
+    "Is the bidding process structured as a reverse auction?",
+    "What penalties are outlined in the RFP for non-compliance or breach of terms?",
+    "Are there any Service Level Agreements (SLAs) specified in the RFP? If so, what are they?",
+    "Can you provide details regarding the project timelines specified in the RFP for bid submission and execution?",
+    "What does the indemnity clause in the RFP entail?",
+    "Does the RFP allow for subcontracting, and if so, what are the provisions outlined in the subcontracting clause?",
+    "What is the requirement for a Performance Bank Guarantee (PBG) in the bid?",
+    "What is the specified security deposit amount outlined in the bid document?",
+    "Could you clarify the concept of Earnest Money (EM) in the bid?",
+    "What are the payment terms, milestones, and schedule outlined in the RFP?",
+    "Are there any training requirements stipulated in the RFP for the successful bidder?"
+]
+    
     index_placeholder = None
     st.set_page_config(page_title = "Chat with your PDF using Llama2 & Llama Index", page_icon="🦙")
     st.header('🦙 Chat with your PDF using Llama2 model & Llama Index')
+
+    selected_question = st.selectbox('Select a default question', [""] + default_questions)
     
     if "conversation" not in st.session_state:
         st.session_state.conversation = None
@@ -92,7 +112,10 @@ def main():
                     st.session_state.activate_chat = True
 
     if st.session_state.activate_chat == True:
-        if prompt := st.chat_input("Ask your question from the PDF?"):
+        if selected_question:
+            prompt = st.chat_input(selected_question)
+            #st.session_state.selected_question = ""
+        elif prompt := st.chat_input("Ask your question from the PDF?"):
             with st.chat_message("user", avatar = '👨🏻'):
                 st.markdown(prompt)
             st.session_state.messages.append({"role": "user", 

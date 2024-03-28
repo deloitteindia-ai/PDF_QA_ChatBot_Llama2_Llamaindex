@@ -149,7 +149,7 @@ def main():
                 nativeInputValueSetter.call(chatInput, "{selected_question}");
                 #var event = new Event('input', {{ bubbles: true}});
                 #chatInput.dispatchEvent(event);
-                chatInput.innerHTML(selected_question);
+                chatInput.value(selected_question);
         
             }}
             insertText({len(st.session_state.messages)});

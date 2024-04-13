@@ -16,7 +16,7 @@ from fine_tune import FineTuner
 @st.cache_resource
 def create_datastax_connection():
 
-    cloud_config= {'secure_connect_bundle': 'secure-connect-llm-ai-astra-db'}
+    cloud_config= {'secure_connect_bundle': 'secure-connect-llm-ai-astra-db.zip'}
 
     with open("llm-ai-astra-db-token.json") as f:
         secrets = json.load(f)

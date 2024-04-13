@@ -115,9 +115,9 @@ def main():
     if st.session_state.activate_chat == True:
         selected_question = st.selectbox('Select a default question', [""] + default_questions)
         if selected_question:
-            st.session_state.prompt = st.chat_input(selected_question, disabled = False)
+            prompt = st.chat_input(selected_question, disabled = False)
         else:
-            st.session_state.prompt = st.chat_input("Ask your question from the PDF?")           
+            prompt = st.chat_input("Ask your question from the PDF?")           
         if st.session_state.prompt:
             #if selected_question:
             #    prompt = st.chat_input(selected_question)
@@ -125,10 +125,10 @@ def main():
                 st.markdown(st.session_state.prompt)
             st.session_state.messages.append({"role": "user", 
                                               "avatar" :'👨🏻',
-                                              "content": st.session_state.prompt})
+                                              "content": prompt})
 
             query_index_placeholder = st.session_state.query_engine
-            pdf_response = query_index_placeholder.query(st.session_state.prompt)
+            pdf_response = query_index_placeholder.query(prompt)
             #cleaned_response = pdf_response.response
             cleaned_response = pdf_response
             with st.chat_message("assistant", avatar='🤖'):

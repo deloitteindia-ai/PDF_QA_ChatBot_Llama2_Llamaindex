@@ -118,24 +118,24 @@ def main():
             prompt = st.chat_input(selected_question, disabled = False)
         else:
             prompt = st.chat_input("Ask your question from the PDF?")           
-        if st.session_state.prompt:
+        #if st.session_state.prompt:
             #if selected_question:
             #    prompt = st.chat_input(selected_question)
-            with st.chat_message("user", avatar = '👨🏻'):
-                st.markdown(st.session_state.prompt)
-            st.session_state.messages.append({"role": "user", 
-                                              "avatar" :'👨🏻',
-                                              "content": prompt})
+        with st.chat_message("user", avatar = '👨🏻'):
+            st.markdown(st.session_state.prompt)
+        st.session_state.messages.append({"role": "user", 
+                                          "avatar" :'👨🏻',
+                                          "content": prompt})
 
-            query_index_placeholder = st.session_state.query_engine
-            pdf_response = query_index_placeholder.query(prompt)
-            #cleaned_response = pdf_response.response
-            cleaned_response = pdf_response
-            with st.chat_message("assistant", avatar='🤖'):
-                st.markdown(pdf_response)
-            st.session_state.messages.append({"role": "assistant", 
-                                              "avatar" :'🤖',
-                                              "content": pdf_response})
+        query_index_placeholder = st.session_state.query_engine
+        pdf_response = query_index_placeholder.query(prompt)
+        #cleaned_response = pdf_response.response            
+        cleaned_response = pdf_response
+        with st.chat_message("assistant", avatar='🤖'):
+            st.markdown(pdf_response)
+        st.session_state.messages.append({"role": "assistant", 
+                                          "avatar" :'🤖',
+                                          "content": pdf_response})
     else:
         st.markdown(
             'Upload your PDFs to chat'

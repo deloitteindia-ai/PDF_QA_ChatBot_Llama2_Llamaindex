@@ -16,9 +16,9 @@ from fine_tune import FineTuner
 @st.cache_resource
 def create_datastax_connection():
 
-    cloud_config= {'secure_connect_bundle': 'secure-connect-pdf-summarization.zip'}
+    cloud_config= {'secure_connect_bundle': 'secure-connect-llm-ai-astra-db'}
 
-    with open("pdf-summarization-token.json") as f:
+    with open("llm-ai-astra-db-token.json") as f:
         secrets = json.load(f)
 
     CLIENT_ID = secrets["clientId"]
@@ -71,8 +71,8 @@ def main():
 
     session = create_datastax_connection()
 
-    os.environ['GRADIENT_ACCESS_TOKEN'] = "49SxShZ6rRvQu8YVAeSjoj3a91rqBWZm"
-    os.environ['GRADIENT_WORKSPACE_ID'] = "6114a445-d716-4ff4-ac7b-a7ab9ad42995_workspace"
+    os.environ['GRADIENT_ACCESS_TOKEN'] = "VOPDqjeqdpAksljbgTDEOWsujnpM3Tis"
+    os.environ['GRADIENT_WORKSPACE_ID'] = "662cbc5b-5a11-4250-811b-2664a962ae2a_workspace"
 
     
     

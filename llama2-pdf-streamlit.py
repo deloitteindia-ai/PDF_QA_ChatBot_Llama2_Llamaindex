@@ -128,7 +128,7 @@ def main():
                                               "content": st.session_state.prompt})
 
             query_index_placeholder = st.session_state.query_engine
-            pdf_response = query_index_placeholder.query(prompt)
+            pdf_response = query_index_placeholder.query(st.session_state.prompt)
             #cleaned_response = pdf_response.response
             cleaned_response = pdf_response
             with st.chat_message("assistant", avatar='🤖'):

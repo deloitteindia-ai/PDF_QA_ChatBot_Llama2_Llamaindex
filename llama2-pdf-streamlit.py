@@ -91,7 +91,7 @@ def main():
                     
                     #model_adapter_id = "348d6eb3-32e2-44cb-92a2-fde14bd42cee_model_adapter"
                     #model_adapter_id = "c6e2a7cb-5941-412d-96bf-b7e3c94c24c4_model_adapter"
-                    model_adapter_id = "74d25081-20fc-449f-9de3-4fe487c0f98f_model_adapter"            #Fine-Tuning with 100 questions
+                    model_adapter_id = "45e17435-923b-4699-a085-13b3a93c4319_model_adapter"            #Fine-Tuning with 100 questions
                     llm = GradientModelAdapterLLM(model_adapter_id = model_adapter_id, max_tokens=200)
                     # Initialize Gradient AI Cloud with credentials
                     embed_model = GradientEmbedding(

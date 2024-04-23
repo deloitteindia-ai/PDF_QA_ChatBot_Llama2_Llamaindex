@@ -52,7 +52,7 @@ def main():
     index_placeholder = None
     st.set_page_config(page_title = "Chat with your PDF using Llama2 & Llama Index", page_icon="🦙")
     st.header('🦙 Chat with your PDF using Llama2 model & Llama Index')
-    selected_question = st.selectbox("Select a question", default_questions)
+    selected_question = st.sidebar.selectbox("Select a question", default_questions)
     
     if "conversation" not in st.session_state:
         st.session_state.conversation = None
@@ -135,9 +135,11 @@ def main():
             'Upload your PDFs to chat'
         )
         
-    if st.button("Ask"):
+    if st.sidebar("Ask"):
         st.session_state.activate_chat = True
         prompt = selected_question
+        with st.chat_message("user", avatar = '👨🏻'):
+                st.markdown(prompt)
         st.session_state.messages.append({"role": "user", 
                                           "avatar" :'👨🏻',
                                           "content": prompt})

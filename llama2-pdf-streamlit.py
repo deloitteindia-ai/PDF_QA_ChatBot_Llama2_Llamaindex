@@ -143,7 +143,7 @@ def main():
 
     # Display selected question in chat input box
     if st.session_state.prompt:
-        if prompt := st.chat_input("Ask your question from the PDF?", value=st.session_state.prompt):
+        if prompt = st.chat_input("Ask your question from the PDF?", value=st.session_state.prompt):
             st.session_state.prompt = prompt
             st.session_state.messages.append({"role": "user", 
                                                "avatar" :'👨🏻',

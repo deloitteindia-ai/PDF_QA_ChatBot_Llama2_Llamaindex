@@ -79,7 +79,11 @@ def main():
 
     with st.sidebar:
         selected_question = st.selectbox("Select a question", default_questions)
-        st.sidebar.button("Ask")
+        st.button("Ask")
+        st.subheader('Upload Your PDF File')
+        docs = st.file_uploader('⬆️ Upload your PDF & Click to process',
+                                accept_multiple_files = False, 
+                                type=['pdf'])
         if st.button('Process'):
             with NamedTemporaryFile(dir='.', suffix='.pdf') as f:
                 f.write(docs.getbuffer())
@@ -151,12 +155,6 @@ def main():
             st.session_state.messages.append({"role": "assistant", 
                                               "avatar" :'🤖',
                                               "content": pdf_response})
-        st.subheader('Upload Your PDF File')
-        docs = st.file_uploader('⬆️ Upload your PDF & Click to process',
-                                accept_multiple_files = False, 
-                                type=['pdf'])
-    
-    
 
 
 if __name__ == '__main__':

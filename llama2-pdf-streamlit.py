@@ -134,9 +134,8 @@ def main():
         st.markdown(
             'Upload your PDFs to chat'
         )
-
-
-    if  selected_question :
+        
+    if st.button("Ask"):
         st.session_state.activate_chat = True
         prompt = selected_question
         st.session_state.messages.append({"role": "user", 

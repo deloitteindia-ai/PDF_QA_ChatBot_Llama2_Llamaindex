@@ -93,7 +93,7 @@ def main():
                     #model_adapter_id = "348d6eb3-32e2-44cb-92a2-fde14bd42cee_model_adapter"
                     #model_adapter_id = "c6e2a7cb-5941-412d-96bf-b7e3c94c24c4_model_adapter"
                     model_adapter_id = "45e17435-923b-4699-a085-13b3a93c4319_model_adapter"            #Fine-Tuning with 100 questions
-                    llm = GradientModelAdapterLLM(model_adapter_id = model_adapter_id, max_tokens=200)
+                    llm = GradientModelAdapterLLM(model_adapter_id = model_adapter_id, max_tokens=400)
                     # Initialize Gradient AI Cloud with credentials
                     embed_model = GradientEmbedding(
                                 gradient_access_token = os.environ["GRADIENT_ACCESS_TOKEN"],
@@ -112,6 +112,23 @@ def main():
                     if "query_engine" not in st.session_state:
                         st.session_state.query_engine = query_engine
                     st.session_state.activate_chat = True
+                    selected_question = st.sidebar.selectbox("Select a question", default_questions)
+                    if st.sidebar.button("Ask"):
+                        prompt = selected_question
+                        with st.chat_message("user", avatar = '👨🏻'):
+                            st.markdown(prompt)
+                        st.session_state.messages.append({"role": "user", 
+                                                          "avatar" :'👨🏻',
+                                                          "content": prompt})
+                        query_index_placeholder = st.session_state.query_engine
+                        pdf_response = query_index_placeholder.query(prompt)
+                        #cleaned_response = pdf_response.response
+                        cleaned_response = pdf_response
+                        with st.chat_message("assistant", avatar='🤖'):
+                            st.markdown(pdf_response)
+                        st.session_state.messages.append({"role": "assistant", 
+                                                          "avatar" :'🤖',
+                                                          "content": pdf_response})
 
     if st.session_state.activate_chat == True:
         if prompt := st.chat_input("Ask your question from the PDF?"):
@@ -135,23 +152,7 @@ def main():
             'Upload your PDFs to chat'
         )
         
-    if st.sidebar.button("Ask"):
-        st.session_state.activate_chat = True
-        prompt = selected_question
-        with st.chat_message("user", avatar = '👨🏻'):
-            st.markdown(prompt)
-        st.session_state.messages.append({"role": "user", 
-                                          "avatar" :'👨🏻',
-                                          "content": prompt})
-        query_index_placeholder = st.session_state.query_engine
-        pdf_response = query_index_placeholder.query(prompt)
-        #cleaned_response = pdf_response.response
-        cleaned_response = pdf_response
-        with st.chat_message("assistant", avatar='🤖'):
-            st.markdown(pdf_response)
-        st.session_state.messages.append({"role": "assistant", 
-                                          "avatar" :'🤖',
-                                          "content": pdf_response})
+  
     
     
 

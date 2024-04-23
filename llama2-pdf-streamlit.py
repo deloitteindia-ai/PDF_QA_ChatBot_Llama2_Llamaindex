@@ -139,28 +139,10 @@ def main():
     selected_question = st.sidebar.selectbox("Select a question:", default_questions)
     if st.sidebar.button("Ask"):
         st.session_state.prompt = selected_question
-        st.session_state.activate_chat = True
+        ##st.session_state.activate_chat = True
+        st.chat_input("Ask your question from the PDF?", value=st.session_state.prompt)
 
-    # Display selected question in chat input box
-    if st.session_state.prompt:
-        prompt = st.chat_input("Ask your question from the PDF?", value=st.session_state.prompt)
-        if prompt:
-            st.session_state.prompt = prompt
-            st.session_state.messages.append({"role": "user", 
-                                               "avatar" :'👨🏻',
-                                               "content": prompt})
-
-            query_index_placeholder = st.session_state.query_engine
-            pdf_response = query_index_placeholder.query(prompt)
-            #cleaned_response = pdf_response.response
-            cleaned_response = pdf_response
-            with st.chat_message("assistant", avatar='🤖'):
-                st.markdown(pdf_response)
-            st.session_state.messages.append({"role": "assistant", 
-                                               "avatar" :'🤖',
-                                               "content": pdf_response})
-
-
+    
     
 
 

@@ -139,7 +139,7 @@ def main():
         st.session_state.activate_chat = True
         prompt = selected_question
         with st.chat_message("user", avatar = '👨🏻'):
-                st.markdown(prompt)
+            st.markdown(prompt)
         st.session_state.messages.append({"role": "user", 
                                           "avatar" :'👨🏻',
                                           "content": prompt})

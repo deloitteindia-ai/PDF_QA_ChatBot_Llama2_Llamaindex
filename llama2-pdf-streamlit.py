@@ -135,7 +135,7 @@ def main():
             'Upload your PDFs to chat'
         )
         
-    if st.sidebar("Ask"):
+    if st.sidebar.button("Ask"):
         st.session_state.activate_chat = True
         prompt = selected_question
         with st.chat_message("user", avatar = '👨🏻'):

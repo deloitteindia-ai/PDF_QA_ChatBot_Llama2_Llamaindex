@@ -52,7 +52,8 @@ def main():
     index_placeholder = None
     st.set_page_config(page_title = "Chat with your PDF using Llama2 & Llama Index", page_icon="🦙")
     st.header('🦙 Chat with your PDF using Llama2 model & Llama Index')
-    st.selectbox("Select a question", default_questions)
+    selected_question = st.selectbox("Select a question", default_questions)
+    
     if "conversation" not in st.session_state:
         st.session_state.conversation = None
 

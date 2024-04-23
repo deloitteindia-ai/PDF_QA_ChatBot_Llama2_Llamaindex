@@ -78,28 +78,8 @@ def main():
     
 
     with st.sidebar:
-        selected_question = st.sidebar.selectbox("Select a question", default_questions)
-        if st.sidebar.button("Ask"):
-            st.session_state.activate_chat = True
-            prompt = selected_question
-            with st.chat_message("user", avatar = '👨🏻'):
-                st.markdown(prompt)
-            st.session_state.messages.append({"role": "user", 
-                                              "avatar" :'👨🏻',
-                                              "content": prompt})
-            query_index_placeholder = st.session_state.query_engine
-            pdf_response = query_index_placeholder.query(prompt)
-            #cleaned_response = pdf_response.response
-            cleaned_response = pdf_response
-            with st.chat_message("assistant", avatar='🤖'):
-                st.markdown(pdf_response)
-            st.session_state.messages.append({"role": "assistant", 
-                                              "avatar" :'🤖',
-                                              "content": pdf_response})
-        st.subheader('Upload Your PDF File')
-        docs = st.file_uploader('⬆️ Upload your PDF & Click to process',
-                                accept_multiple_files = False, 
-                                type=['pdf'])
+        selected_question = st.selectbox("Select a question", default_questions)
+        st.sidebar.button("Ask")
         if st.button('Process'):
             with NamedTemporaryFile(dir='.', suffix='.pdf') as f:
                 f.write(docs.getbuffer())
@@ -151,8 +131,30 @@ def main():
         st.markdown(
             'Upload your PDFs to chat'
         )
+
+    
         
-  
+    if st.sidebar.button("Ask"):
+            st.session_state.activate_chat = True
+            prompt = selected_question
+            with st.chat_message("user", avatar = '👨🏻'):
+                st.markdown(prompt)
+            st.session_state.messages.append({"role": "user", 
+                                              "avatar" :'👨🏻',
+                                              "content": prompt})
+            query_index_placeholder = st.session_state.query_engine
+            pdf_response = query_index_placeholder.query(prompt)
+            #cleaned_response = pdf_response.response
+            cleaned_response = pdf_response
+            with st.chat_message("assistant", avatar='🤖'):
+                st.markdown(pdf_response)
+            st.session_state.messages.append({"role": "assistant", 
+                                              "avatar" :'🤖',
+                                              "content": pdf_response})
+        st.subheader('Upload Your PDF File')
+        docs = st.file_uploader('⬆️ Upload your PDF & Click to process',
+                                accept_multiple_files = False, 
+                                type=['pdf'])
     
     
 

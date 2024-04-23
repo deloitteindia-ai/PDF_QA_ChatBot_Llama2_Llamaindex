@@ -78,8 +78,6 @@ def main():
     
 
     with st.sidebar:
-        selected_question = st.selectbox("Select a question", default_questions)
-        st.button("Ask")
         st.subheader('Upload Your PDF File')
         docs = st.file_uploader('⬆️ Upload your PDF & Click to process',
                                 accept_multiple_files = False, 
@@ -137,7 +135,7 @@ def main():
         )
 
     
-        
+    selected_question = st.sidebar.selectbox("Select a question", default_questions)
     if st.sidebar.button("Ask"):
             st.session_state.activate_chat = True
             prompt = selected_question

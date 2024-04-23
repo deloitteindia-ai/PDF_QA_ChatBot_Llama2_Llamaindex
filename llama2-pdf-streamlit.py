@@ -135,8 +135,22 @@ def main():
             'Upload your PDFs to chat'
         )
 
-   
 
+    if  selected_question :
+        st.session_state.activate_chat = True
+        prompt = selected_question
+        st.session_state.messages.append({"role": "user", 
+                                          "avatar" :'👨🏻',
+                                          "content": prompt})
+        query_index_placeholder = st.session_state.query_engine
+        pdf_response = query_index_placeholder.query(prompt)
+        #cleaned_response = pdf_response.response
+        cleaned_response = pdf_response
+        with st.chat_message("assistant", avatar='🤖'):
+            st.markdown(pdf_response)
+        st.session_state.messages.append({"role": "assistant", 
+                                          "avatar" :'🤖',
+                                          "content": pdf_response})
     
     
 

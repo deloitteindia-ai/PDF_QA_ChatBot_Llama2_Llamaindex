@@ -52,7 +52,7 @@ def main():
     index_placeholder = None
     st.set_page_config(page_title = "Chat with your PDF using Llama2 & Llama Index", page_icon="🦙")
     st.header('🦙 Chat with your PDF using Llama2 model & Llama Index')
-    selected_question = st.selectbox("Select a question", default_questions)
+    #selected_question = st.selectbox("Select a question", default_questions)
     
     if "conversation" not in st.session_state:
         st.session_state.conversation = None
@@ -134,22 +134,33 @@ def main():
         st.markdown(
             'Upload your PDFs to chat'
         )
-        
-        #js = f"""
-        #<script>
-        #    function insertText(dummy_var_to_force_repeat_execution) {{
-        #        var chatInput = parent.document.querySelector('textarea[data-testid="stChatInput"]');
-        #        var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, "value").set;
-        #        nativeInputValueSetter.call(chatInput, "{selected_question}");
-        #        #var event = new Event('input', {{ bubbles: true}});
-        #        #chatInput.dispatchEvent(event);
-        #        chatInput.value(selected_question);
-        #
-        #    }}
-        #    insertText({len(st.session_state.messages)});
-        #</script>
-        #"""
-        #st.components.v1.html(js)
+
+   # Dropdown menu for default questions
+    selected_question = st.sidebar.selectbox("Select a question:", default_questions)
+    if st.sidebar.button("Ask"):
+        st.session_state.prompt = selected_question
+        st.session_state.activate_chat = True
+
+    # Display selected question in chat input box
+    if st.session_state.prompt:
+        if prompt := st.chat_input("Ask your question from the PDF?", value=st.session_state.prompt):
+            st.session_state.prompt = prompt
+            st.session_state.messages.append({"role": "user", 
+                                               "avatar" :'👨🏻',
+                                               "content": prompt})
+
+            query_index_placeholder = st.session_state.query_engine
+            pdf_response = query_index_placeholder.query(prompt)
+            #cleaned_response = pdf_response.response
+            cleaned_response = pdf_response
+            with st.chat_message("assistant", avatar='🤖'):
+                st.markdown(pdf_response)
+            st.session_state.messages.append({"role": "assistant", 
+                                               "avatar" :'🤖',
+                                               "content": pdf_response})
+
+
+    
 
 
 if __name__ == '__main__':
